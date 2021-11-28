@@ -28,12 +28,8 @@ public class Universe {
         List<Cell> neighbours = cell.getNeighbours();
         for (Cell neighbour : neighbours) {
             List<Cell> cellNeighbour = neighbour.getNeighbours();
-            int liveNeighbours = 0;
-            for (Cell alive : cellNeighbour) {
-                if (currentGeneration.contains(alive))
-                    liveNeighbours++;
-            }
-            if (liveNeighbours == 3 && !newGeneration.contains(neighbour))
+            int aliveNeighbours = cellNeighbour.stream().filter(currentGeneration::contains).collect(Collectors.toList()).size();
+            if (aliveNeighbours == 3 && !newGeneration.contains(neighbour))
                 newGeneration.add(neighbour);
         }
     }
