@@ -37,7 +37,7 @@ public class Universe {
     private void removeDeadCellsFromNewGeneration(List<Cell> newGeneration, Cell cell) {
         int aliveNeighbours = 0;
         List<Cell> neighbours = cell.getNeighbours();
-        aliveNeighbours = neighbours.stream().filter(currentGeneration ::contains).collect(Collectors.toList()).size();
+        aliveNeighbours = neighbours.stream().filter(currentGeneration::contains).collect(Collectors.toList()).size();
         if (aliveNeighbours < 2 || aliveNeighbours > 3)
             newGeneration.remove(cell);
     }
