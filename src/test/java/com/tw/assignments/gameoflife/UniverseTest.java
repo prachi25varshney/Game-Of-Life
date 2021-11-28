@@ -17,11 +17,9 @@ public class UniverseTest {
         List<Cell> currentGeneration = new ArrayList<>();
         currentGeneration.add(new Cell(1, 1));
         currentGeneration.add(new Cell(1, 2));
-        currentGeneration.add(new Cell(2, 0));
         Universe universe = new Universe(currentGeneration);
 
         List<Cell> expectedNewGeneration = new ArrayList<>();
-        expectedNewGeneration.add(new Cell(1, 1));
 
         List<Cell> newGeneration = universe.newGeneration();
         assertThat(expectedNewGeneration, is(equalTo(newGeneration)));
@@ -30,18 +28,19 @@ public class UniverseTest {
     @Test
     void expectCellDieByOverCrowdingWhenAliveNeighbourCellsAreMoreThanThree() {
         List<Cell> currentGeneration = new ArrayList<>();
-        currentGeneration.add(new Cell(0, 1));
         currentGeneration.add(new Cell(1, 0));
         currentGeneration.add(new Cell(1, 1));
         currentGeneration.add(new Cell(1, 2));
         currentGeneration.add(new Cell(2, 1));
+        currentGeneration.add(new Cell(2, 2));
         Universe universe = new Universe(currentGeneration);
 
         List<Cell> expectedNewGeneration = new ArrayList<>();
-        expectedNewGeneration.add(new Cell(0, 1));
         expectedNewGeneration.add(new Cell(1, 0));
         expectedNewGeneration.add(new Cell(1, 2));
-        expectedNewGeneration.add(new Cell(2, 1));
+        expectedNewGeneration.add(new Cell(2, 2));
+        expectedNewGeneration.add(new Cell(0, 1));
+        expectedNewGeneration.add(new Cell(2, 0));
 
         List<Cell> newGeneration = universe.newGeneration();
         assertThat(expectedNewGeneration, is(equalTo(newGeneration)));
