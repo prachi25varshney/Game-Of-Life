@@ -46,4 +46,27 @@ public class UniverseTest {
         List<Cell> newGeneration = universe.newGeneration();
         assertThat(expectedNewGeneration, is(equalTo(newGeneration)));
     }
+
+    @Test
+    void exceptDeadCellComesToLifeWhenAliveNeighbourCellsAreExactlyThree() {
+        List<Cell> currentGeneration = new ArrayList<>();
+        currentGeneration.add(new Cell(1, 1));
+        currentGeneration.add(new Cell(1, 2));
+        currentGeneration.add(new Cell(1, 3));
+        currentGeneration.add(new Cell(2, 2));
+        currentGeneration.add(new Cell(2, 3));
+        currentGeneration.add(new Cell(2, 4));
+        Universe universe = new Universe(currentGeneration);
+
+        List<Cell> expectedNewGeneration = new ArrayList<>();
+        expectedNewGeneration.add(new Cell(1, 1));
+        expectedNewGeneration.add(new Cell(2, 4));
+        expectedNewGeneration.add(new Cell(0, 2));
+        expectedNewGeneration.add(new Cell(2, 1));
+        expectedNewGeneration.add(new Cell(1, 4));
+        expectedNewGeneration.add(new Cell(3, 3));
+
+        List<Cell> newGeneration = universe.newGeneration();
+        assertThat(expectedNewGeneration, is(equalTo(newGeneration)));
+    }
 }
