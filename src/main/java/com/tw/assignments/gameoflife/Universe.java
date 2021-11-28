@@ -2,6 +2,7 @@ package com.tw.assignments.gameoflife;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Universe {
     private final List<Cell> currentGeneration;
@@ -38,13 +39,10 @@ public class Universe {
     }
 
     private void removeDeadCellsFromNewGeneration(List<Cell> newGeneration, Cell cell) {
-        int liveNeighbours = 0;
+        int aliveNeighbours = 0;
         List<Cell> neighbours = cell.getNeighbours();
-        for (Cell neighbour : neighbours) {
-            if (currentGeneration.contains(neighbour))
-                liveNeighbours++;
-        }
-        if (liveNeighbours < 2 || liveNeighbours > 3)
+        aliveNeighbours = neighbours.stream().filter(currentGeneration ::contains).collect(Collectors.toList()).size();
+        if (aliveNeighbours < 2 || aliveNeighbours > 3)
             newGeneration.remove(cell);
     }
 }
