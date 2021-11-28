@@ -26,7 +26,7 @@ public class Universe {
             if (currentGeneration.contains(neighbour))
                 liveNeighbours++;
         }
-        if (liveNeighbours < 2)
+        if (liveNeighbours < 2 || liveNeighbours > 3)
             newGeneration.remove(cell);
     }
 }
